@@ -9,9 +9,15 @@ Use `pip` (or `pip3`, if there is a conflict with Python2) to install dependenci
 pip install -r requirements.txt
 ```
 ### Examples of running script
-```
+
 Get shorten link
+
 ![Example](https://github.com/e13q/WA_lesson2/assets/110967581/f84f1393-5a76-4bff-aea4-8874e15572aa)
 
 Get info about shorten link
+
 ![Example2](https://github.com/e13q/WA_lesson2/assets/110967581/f5069073-2032-4d2e-b30a-7268080ef557)
+
+### Project Goals
+
+This code was written for educational purposes as part of an online course for web developers at [dvmn.org](https://dvmn.org/).
