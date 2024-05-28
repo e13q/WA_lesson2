@@ -1,6 +1,6 @@
 # Short links and clics count
 
-Utility for shortening links and for get information (clics count, expanded link) about shortened links using VK API.
+Utility for shortening links and for information (clics count, expanded link) about shortened links using VK API.
 ### How to install
 
 Python3 should already be installed. 
