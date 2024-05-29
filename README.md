@@ -2,7 +2,7 @@
 
 Utility for shortening links and for information (clics count, expanded link) about shortened links using VK API.
 ### How to install
-
+ 
 Python3 should already be installed. 
 Use `pip` (or `pip3`, if there is a conflict with Python2) to install dependencies:
 ```
