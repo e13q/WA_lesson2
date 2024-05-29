@@ -8,7 +8,44 @@ Use `pip` (or `pip3`, if there is a conflict with Python2) to install dependenci
 ```
 pip install -r requirements.txt
 ```
+If you load project locally, then create `.env` file in project directory.
+
+In .env write and fill `API_KEY`.
+
+If you load project on service (like replit) then just add a secret key `API_KEY` and fill it.
+
+Api key can be obtained via [instruction](https://id.vk.com/about/business/go/docs/ru/vkid/latest/vk-id/tokens/service-token).
+
+Example:
+`API_KEY = '65cc8c6765cc8c6765cc8c67e466d4ebb4665fe65cc8c6703qwea96d78517798bcde495'`
+### How to use
+
+#### Windows OS
+
+Open cmd/powershell/etc.
+
+Change current directory in console to project directory by cd command.
+
+Run script by command:
+
+`py main.py`
+
+#### Linux OS
+
+Open console.
+
+Change current directory in console to project directory by cd command.
+
+Run script by command:
+
+`python3 main.py`
+
 ### Examples of running script
+
+Running example
+
+![Example3](https://github.com/e13q/WA_lesson2/assets/110967581/2c701e76-a78c-48b0-affd-d188f886bd5c)
+
 
 Get shorten link
 
