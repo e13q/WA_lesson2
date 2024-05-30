@@ -10,14 +10,14 @@ pip install -r requirements.txt
 ```
 If you load project locally, then create `.env` file in project directory.
 
-In .env write and fill `API_KEY`.
+In .env write and fill `VK_SERVICE_ACCESS_KEY`.
 
-If you load project on service (like replit) then just add a secret key `API_KEY` and fill it.
+If you load project on service (like replit) then just add a secret key `VK_SERVICE_ACCESS_KEY` and fill it.
 
 Api key can be obtained via [instruction](https://id.vk.com/about/business/go/docs/ru/vkid/latest/vk-id/tokens/service-token).
 
 Example:
-`API_KEY = '65cc8c6765cc8c6765cc8c67e466d4ebb4665fe65cc8c6703qwea96d78517798bcde495'`
+`VK_SERVICE_ACCESS_KEY = '65cc8c6765cc8c6765cc8c67e466d4ebb4665fe65cc8c6703qwea96d78517798bcde495'`
 ### How to use
 
 #### Windows OS
