@@ -5,16 +5,10 @@ from dotenv import load_dotenv
 from urllib.parse import urlparse
 
 
-api_expand_url = 'https://api.vk.ru/method/utils.checkLink'
-api_get_shorten_url = 'https://api.vk.ru/method/utils.getShortLink'
-api_get_link_info = 'https://api.vk.ru/method/utils.getLinkStats'
-header_api_key = None
-
-
-def get_url_views_count(key, header_api_key):
+def get_url_views_count(key, auth_header):
     response = requests.post(
-                        api_get_link_info,
-                        headers=header_api_key,
+                        'https://api.vk.ru/method/utils.getLinkStats',
+                        headers=auth_header,
                         params={"key": key, 'v': '5.236'}
                         )
     response.raise_for_status()
@@ -23,46 +17,43 @@ def get_url_views_count(key, header_api_key):
         raise requests.exceptions.RequestException
     if ('stats' in response_json['response']
             and response_json['response']['stats'] != []):
-        response_json = response_json['response']['stats']
+        timestamping_stats = response_json['response']['stats']
         views_count = 0
-        for i in response_json:
-            views_count += i['views']
+        for timestamped_stats in timestamping_stats:
+            views_count += timestamped_stats['views']
         return views_count
     return None
 
 
-def shorten_url(url, header_api_key):
+def shorten_url(url, auth_header):
     response = requests.post(
-                        api_get_shorten_url,
-                        headers=header_api_key,
+                        'https://api.vk.ru/method/utils.getShortLink',
+                        headers=auth_header,
                         params={"url": url, 'v': '5.236'}
                         )
     response.raise_for_status()
-    shortened_link = response.json()
-    if 'error' in shortened_link:
+    response_json = response.json()
+    if 'error' in response_json:
         raise requests.exceptions.RequestException
-    return shortened_link['response']['short_url']
+    return response_json['response']['short_url']
 
 
 def is_shorten_link(url):
     parsed_url = urlparse(url)
-    if parsed_url.hostname == 'vk.cc':
-        return True
-    else:
-        return False
+    return parsed_url.hostname == 'vk.cc'
 
 
 if __name__ == '__main__':
     load_dotenv()
-    header_api_key = {'Authorization': f'Bearer {os.environ['API_KEY']}'}
-    print('Input your link')
-    url = input()
+    auth_header = {'Authorization':
+                   f'Bearer {os.environ['VK_SERVICE_ACCESS_KEY']}'}
+    url = input('Input your link\n')
     if is_shorten_link(url):
         print('Trying to get link info..')
         parsed_url = urlparse(url)
         key = parsed_url.path[1:]
         try:
-            url_views_count = get_url_views_count(key, header_api_key)
+            url_views_count = get_url_views_count(key, auth_header)
             if url_views_count is None:
                 print('No stats for now')
             else:
@@ -72,7 +63,7 @@ if __name__ == '__main__':
     else:
         print('Trying to shorten your url..')
         try:
-            shortened_link = shorten_url(url, header_api_key)
+            shortened_link = shorten_url(url, auth_header)
             print(f'Shortened link for {url} is {shortened_link}')
         except requests.exceptions.RequestException:
             print('Request error. Is this is a correct url?')
