@@ -12,12 +12,12 @@ def get_url_views_count(key, auth_header):
                         params={"key": key, 'v': '5.236'}
                         )
     response.raise_for_status()
-    response_json = response.json()
-    if 'error' in response_json:
+    response = response.json()
+    if 'error' in response:
         raise requests.exceptions.RequestException
-    if ('stats' in response_json['response']
-            and response_json['response']['stats'] != []):
-        timestamping_stats = response_json['response']['stats']
+    if ('stats' in response['response']
+            and response['response']['stats'] != []):
+        timestamping_stats = response['response']['stats']
         views_count = 0
         for timestamped_stats in timestamping_stats:
             views_count += timestamped_stats['views']
@@ -32,10 +32,10 @@ def shorten_url(url, auth_header):
                         params={"url": url, 'v': '5.236'}
                         )
     response.raise_for_status()
-    response_json = response.json()
-    if 'error' in response_json:
+    response = response.json()
+    if 'error' in response:
         raise requests.exceptions.RequestException
-    return response_json['response']['short_url']
+    return response['response']['short_url']
 
 
 def is_shorten_link(url):
